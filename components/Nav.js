@@ -1,4 +1,6 @@
-import React from 'react';
+import { useContext } from 'react';
+import { CartContext } from '../context/shopContext';
+import MiniCart from './MiniCart';
 const trendingProducts = [
   {
     id: 1,
