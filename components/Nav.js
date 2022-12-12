@@ -389,7 +389,7 @@ export default function Example() {
           {/* Secondary navigation */}
           <div className='bg-white'>
             <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
-              <div className='border-b border-gray-200'>
+              <div className=''>
                 <div className='flex justify-between items-center h-32'>
                   {/* Logo (lg+) */}
                   <div className='hidden lg:flex lg:items-center'>
