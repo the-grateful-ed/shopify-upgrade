@@ -22,10 +22,10 @@ export default function MiniCart({ cart }) {
       <Dialog
         initialFocus={cancelButtonRef}
         as="div"
-        className="fixed inset-0 z-50 overflow-hidden"
+        className="overflow-hidden fixed inset-0 z-50"
         onClose={() => { setCartOpen(!cartOpen) }}
       >
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="overflow-hidden absolute inset-0">
           <Transition.Child
             as={Fragment}
             enter="ease-in-out duration-500"
@@ -35,10 +35,10 @@ export default function MiniCart({ cart }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="absolute inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
+            <Dialog.Overlay className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
           </Transition.Child>
 
-          <div className="fixed inset-y-0 right-0 flex max-w-full pl-10">
+          <div className="flex fixed inset-y-0 right-0 pl-10 max-w-full">
             <Transition.Child
               as={Fragment}
               enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -49,9 +49,9 @@ export default function MiniCart({ cart }) {
               leaveTo="translate-x-full"
             >
               <div className="w-screen max-w-md">
-                <div className="flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
-                  <div className="flex-1 px-4 py-6 overflow-y-auto sm:px-6">
-                    <div className="flex items-start justify-between">
+                <div className="flex overflow-y-scroll flex-col h-full bg-white shadow-xl">
+                  <div className="overflow-y-auto flex-1 px-4 py-6 sm:px-6">
+                    <div className="flex justify-between items-start">
                       <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
                       <div className="flex items-center ml-3 h-7">
                         <button
@@ -73,9 +73,9 @@ export default function MiniCart({ cart }) {
 
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
                               {cart.map((product) => (
-                                <li key={product.id + Math.random()} className="relative flex py-6">
+                                <li key={product.id + Math.random()} className="flex relative py-6">
                                   <div className={`top-0 left-0 right-0 z-50 w-full h-full absolute ${cartLoading ? "bg-white opacity-60" : "hidden"}`}></div>
-                                  <div className="relative flex-shrink-0 w-24 h-24 overflow-hidden border border-gray-200 rounded-md">
+                                  <div className="overflow-hidden relative flex-shrink-0 w-24 h-24 rounded-md border border-gray-200">
                                     <Image
                                       src={product.image}
                                       alt={product.title}
@@ -88,15 +88,14 @@ export default function MiniCart({ cart }) {
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
                                         <h3>
-                                          <Link href={`/products/${product.handle}`} passHref>
-                                            <a onClick={() => setCartOpen(false)}>{product.title}</a>
+                                          <Link href={`/products/${product.handle}`} passHref onClick={() => setCartOpen(false)}>{product.title}</a>
                                           </Link>
                                         </h3>
                                         <p className="ml-4">{formatter.format(product.variantPrice)}</p>
                                       </div>
                                       <p className="mt-1 text-sm text-gray-500">{product.variantTitle}</p>
                                     </div>
-                                    <div className="flex items-end justify-between flex-1 text-sm">
+                                    <div className="flex flex-1 justify-between items-end text-sm">
                                       {/* <p className="text-gray-500">Qty {product.variantQuantity}</p> */}
                                       <div className={`border`}>
                                         <button 
@@ -106,7 +105,7 @@ export default function MiniCart({ cart }) {
                                         >
                                           -
                                         </button>
-                                        <span className="px-2 border-l border-r">{product.variantQuantity}</span>
+                                        <span className="px-2 border-r border-l">{product.variantQuantity}</span>
                                         <button 
                                           className="px-2" 
                                           onClick={() => incrementCartItem(product)}
