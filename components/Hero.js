@@ -1,52 +1,138 @@
 import Link from 'next/link';
+import { Fragment, useState } from 'react';
+import { Dialog, Popover, Tab, Transition } from '@headlessui/react';
+import {
+  MenuIcon,
+  QuestionMarkCircleIcon,
+  SearchIcon,
+  ShoppingBagIcon,
+  XIcon,
+} from '@heroicons/react/outline';
 
+const collections = [
+  {
+    name: "Women's",
+    href: '#',
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-01.jpg',
+    imageAlt: 'Woman wearing a comfortable cotton t-shirt.',
+  },
+  {
+    name: "Men's",
+    href: '#',
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-02.jpg',
+    imageAlt: 'Man wearing a comfortable and casual cotton t-shirt.',
+  },
+  {
+    name: 'Desk Accessories',
+    href: '#',
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-03.jpg',
+    imageAlt:
+      'Person sitting at a wooden desk with paper note organizer, pencil and tablet.',
+  },
+];
 export default function Hero() {
   return (
     <main>
-      <div>
-        {/* Hero card */}
-        <div className='relative'>
-          <div className='absolute inset-x-0 bottom-0 h-1/2 bg-gray-100' />
-          <div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
-            <div className='relative shadow-xl sm:rounded-2xl sm:overflow-hidden'>
-              <div className='absolute inset-0'>
+      <div className='relative'>
+        {/* Background image and overlap */}
+        <div
+          aria-hidden='true'
+          className='hidden absolute inset-0 sm:flex sm:flex-col'
+        >
+          <div className='relative flex-1 w-full bg-gray-800'>
+            <div className='overflow-hidden absolute inset-0'>
+              <img
+                src='https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg'
+                alt=''
+                className='object-cover object-center w-full h-full'
+              />
+            </div>
+            <div className='absolute inset-0 bg-gray-900 opacity-50' />
+          </div>
+          <div className='w-full h-32 bg-white md:h-40 lg:h-48' />
+        </div>
+
+        <div className='relative px-4 pb-96 mx-auto max-w-3xl text-center sm:pb-0 sm:px-6 lg:px-8'>
+          {/* Background image and overlap */}
+          <div
+            aria-hidden='true'
+            className='flex absolute inset-0 flex-col sm:hidden'
+          >
+            <div className='relative flex-1 w-full bg-gray-800'>
+              <div className='overflow-hidden absolute inset-0'>
                 <img
-                  className='object-cover w-full h-full opacity-30'
-                  src='./bg.jpg'
-                  alt='People working on laptops'
+                  src='https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg'
+                  alt=''
+                  className='object-cover object-center w-full h-full'
                 />
-                <div className='absolute inset-0 bg-[#FF66CC] mix-blend-multiply bg-opacity-100' />
               </div>
-              <div className='relative px-4 py-8 sm:px-6 sm:py-12 lg:py-16 lg:px-8'>
-                <h1 className='text-4xl font-extrabold tracking-tight text-center sm:text-5xl lg:text-6xl'>
-                  <span className='block text-white'>Take control of your</span>
-                  <span className='block text-[#97BFE3]'>customer support</span>
-                </h1>
-                <p className='mx-auto mt-6 max-w-lg text-xl text-center text-indigo-200 sm:max-w-3xl'>
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                  qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-                  occaecat fugiat aliqua.
-                </p>
-                <div className='mx-auto mt-10 max-w-sm sm:max-w-none sm:flex sm:justify-center'>
-                  <div className='space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5'>
-                    <a
-                      href='#'
-                      className='flex justify-center items-center px-4 py-3 text-base font-medium text-indigo-700 bg-white rounded-md border border-transparent shadow-sm hover:bg-indigo-50 sm:px-8'
-                    >
-                      Get started
-                    </a>
-                    <a
-                      href='#'
-                      className='flex justify-center items-center px-4 py-3 text-base font-medium text-white bg-indigo-500 bg-opacity-60 rounded-md border border-transparent shadow-sm hover:bg-opacity-70 sm:px-8'
-                    >
-                      Live demo
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <div className='absolute inset-0 bg-gray-900 opacity-50' />
+            </div>
+            <div className='w-full h-48 bg-white' />
+          </div>
+          <div className='relative py-32'>
+            <h1 className='text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl'>
+              Mid-Season Sale
+            </h1>
+            <div className='mt-4 sm:mt-6'>
+              <a
+                href='#'
+                className='inline-block px-8 py-3 font-medium text-white bg-indigo-600 rounded-md border border-transparent hover:bg-indigo-700'
+              >
+                Shop Collection
+              </a>
             </div>
           </div>
         </div>
+
+        <section
+          aria-labelledby='collection-heading'
+          className='relative -mt-96 sm:mt-0'
+        >
+          <h2 id='collection-heading' className='sr-only'>
+            Collections
+          </h2>
+          <div className='grid grid-cols-1 gap-y-6 px-4 mx-auto max-w-md sm:max-w-7xl sm:px-6 sm:grid-cols-3 sm:gap-y-0 sm:gap-x-6 lg:px-8 lg:gap-x-8'>
+            {collections.map((collection) => (
+              <div
+                key={collection.name}
+                className='relative h-96 bg-white rounded-lg shadow-xl group sm:h-auto sm:aspect-w-4 sm:aspect-h-5'
+              >
+                <div>
+                  <div
+                    aria-hidden='true'
+                    className='overflow-hidden absolute inset-0 rounded-lg'
+                  >
+                    <div className='overflow-hidden absolute inset-0 group-hover:opacity-75'>
+                      <img
+                        src={collection.imageSrc}
+                        alt={collection.imageAlt}
+                        className='object-cover object-center w-full h-full'
+                      />
+                    </div>
+                    <div className='absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50' />
+                  </div>
+                  <div className='flex absolute inset-0 items-end p-6 rounded-lg'>
+                    <div>
+                      <p aria-hidden='true' className='text-sm text-white'>
+                        Shop the collection
+                      </p>
+                      <h3 className='mt-1 font-semibold text-white'>
+                        <a href={collection.href}>
+                          <span className='absolute inset-0' />
+                          {collection.name}
+                        </a>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );
