@@ -6,6 +6,7 @@ import CallToAction from '../components/CallToAction';
 import SecondaryHero from '../components/SecondaryHero';
 
 export default function Home({ products }) {
+  console.log(products);
   return (
     <div className=''>
       <Head>
