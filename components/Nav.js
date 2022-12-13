@@ -302,7 +302,7 @@ export default function Nav() {
                 <div className='flow-root'>
                   <a
                     href='#'
-                    className='block p-2 -m-2 font-medium text-gray-900'
+                    className='block p-2 -m-2 font-medium text-gray-900 link link-underline link-underline-black'
                   >
                     Sign in
                   </a>
@@ -311,7 +311,7 @@ export default function Nav() {
 
               <div className='px-4 py-6 space-y-6 border-t border-gray-200'>
                 {/* Currency selector */}
-                <form>
+                {/* <form>
                   <div className='inline-block'>
                     <label htmlFor='mobile-currency' className='sr-only'>
                       Currency
@@ -345,7 +345,7 @@ export default function Nav() {
                       </div>
                     </div>
                   </div>
-                </form>
+                </form> */}
               </div>
             </div>
           </Transition.Child>
@@ -354,64 +354,14 @@ export default function Nav() {
       <header className='relative'>
         <nav aria-label='Top'>
           {/* Top navigation */}
-          <div className='bg-gray-900'>
-            <div className='flex justify-between items-center px-4 mx-auto max-w-7xl h-10 sm:px-6 lg:px-8'>
-              {/* Currency selector */}
-              <form>
-                <div>
-                  <label htmlFor='desktop-currency' className='sr-only'>
-                    Currency
-                  </label>
-                  <div className='relative -ml-2 bg-gray-900 rounded-md border-transparent group focus-within:ring-2 focus-within:ring-white'>
-                    <select
-                      id='desktop-currency'
-                      name='currency'
-                      className='flex items-center py-0.5 pr-5 pl-2 text-sm font-medium text-white bg-gray-900 bg-none rounded-md border-transparent group-hover:text-gray-100 focus:outline-none focus:ring-0 focus:border-transparent'
-                    >
-                      {currencies.map((currency) => (
-                        <option key={currency}>{currency}</option>
-                      ))}
-                    </select>
-                    <div className='flex absolute inset-y-0 right-0 items-center pointer-events-none'>
-                      <svg
-                        aria-hidden='true'
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 20 20'
-                        className='w-5 h-5 text-gray-300'
-                      >
-                        <path
-                          stroke='currentColor'
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth='1.5'
-                          d='M6 8l4 4 4-4'
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </form>
-
-              <div className='flex items-center space-x-6'>
-                <a
-                  href='#'
-                  className='text-sm font-medium text-white hover:text-gray-100'
-                >
-                  Sign in
-                </a>
-                <a
-                  href='#'
-                  className='text-sm font-medium text-white hover:text-gray-100'
-                >
-                  Create an account
-                </a>
-              </div>
-            </div>
+          <div className='bg-[#38dbff]'>
+            <p className='flex justify-center py-2 w-full text-sm font-medium text-center text-gray-500'>
+              Get free delivery on orders over $100
+            </p>
           </div>
 
           {/* Secondary navigation */}
-          <div className='bg-white'>
+          <div className='bg-[#dd7dff]'>
             <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
               <div className='flex justify-between items-center h-16'>
                 {/* Logo (lg+) */}
@@ -439,7 +389,7 @@ export default function Nav() {
                                   className={classNames(
                                     open
                                       ? 'text-indigo-600'
-                                      : 'text-gray-700 hover:text-gray-800',
+                                      : 'text-black link link-underline link-underline-black',
                                     'flex relative justify-center items-center text-sm font-medium transition-colors duration-200 ease-out'
                                   )}
                                 >
@@ -526,13 +476,18 @@ export default function Nav() {
                       ))}
 
                       {navigation.pages.map((page) => (
-                        <a
-                          key={page.name}
-                          href={page.href}
-                          className='flex items-center text-sm font-medium text-gray-700 hover:text-gray-800'
-                        >
-                          {page.name}
-                        </a>
+                        <div key={page.name} className='pt-2'>
+                          <a
+                            href={page.href}
+                            class='inline-block relative text-sm font-medium text-indigo-600 group focus:outline-none focus:ring active:text-indigo-500'
+                          >
+                            <span class='absolute inset-0 bg-indigo-600 transition-transform translate-x-0 translate-y-0 group-hover:translate-y-0.5 group-hover:translate-x-0.5'></span>
+
+                            <span class='block relative px-8 py-3 bg-white border border-current'>
+                              {page.name}{' '}
+                            </span>
+                          </a>
+                        </div>
                       ))}
                     </div>
                   </Popover.Group>
@@ -604,10 +559,10 @@ export default function Nav() {
                         onClick={() => setCartOpen(!cartOpen)}
                       >
                         <ShoppingBagIcon
-                          className='flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500'
+                          className='flex-shrink-0 w-6 h-6 text-black group-hover:text-gray-800'
                           aria-hidden='true'
                         />
-                        <span className='ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800'>
+                        <span className='ml-2 text-sm font-medium text-black group-hover:text-gray-800'>
                           {cartQuantity}
                         </span>
                         <span className='sr-only'>items in cart, view bag</span>

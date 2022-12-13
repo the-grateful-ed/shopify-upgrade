@@ -9,7 +9,7 @@ const pages = [
 export default function Breadcrumb() {
   return (
     <nav
-      className='flex px-10 max-w-7xl bg-white border-gray-200 border-y'
+      className='flex px-10 w-full bg-[#fff503] border-black border-y'
       aria-label='Breadcrumb'
     >
       <ol
@@ -20,7 +20,7 @@ export default function Breadcrumb() {
           <div className='flex items-center'>
             <a
               href='#'
-              className='text-gray-400 hover:text-[#FF66CC] transition-all duration-500 ease-in-out'
+              className='transition-all duration-500 ease-in-out text-grey-500 hover:text-black'
             >
               <HomeIcon className='flex-shrink-0 w-5 h-5' aria-hidden='true' />
               <span className='sr-only'>Home</span>
@@ -31,7 +31,7 @@ export default function Breadcrumb() {
           <li key={page.name} className='flex'>
             <div className='flex items-center'>
               <svg
-                className='flex-shrink-0 w-6 h-full text-gray-200'
+                className='flex-shrink-0 w-6 h-full text-black'
                 viewBox='0 0 24 44'
                 preserveAspectRatio='none'
                 fill='currentColor'
@@ -42,7 +42,7 @@ export default function Breadcrumb() {
               </svg>
               <a
                 href={page.href}
-                className='ml-4 text-sm font-medium text-gray-500 hover:text-[#FF66CC] transition-all duration-500 ease-in-out'
+                className='ml-4 text-sm font-medium text-gray-500 transition-all duration-500 ease-in-out hover:text-black'
                 aria-current={page.current ? 'page' : undefined}
               >
                 {page.name}
