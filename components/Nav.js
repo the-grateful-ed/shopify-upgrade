@@ -369,9 +369,9 @@ export default function Nav() {
                 <div className='hidden lg:flex-1 lg:flex lg:items-center'>
                   <a href='./'>
                     <span className='sr-only'>Pinky's Bead Company</span>
-                    <h1 class='block mb-1 text-2xl font-extrabold tracking-tight leading-none text-white md:text-3xl lg:text-4xl'>
+                    <h1 className='block mb-1 text-2xl font-extrabold tracking-tight leading-none text-white md:text-3xl lg:text-4xl'>
                       Pinky's
-                      <mark class='px-2 text-white bg-blue-600 rounded dark:bg-blue-500'>
+                      <mark className='px-2 text-white bg-blue-600 rounded dark:bg-blue-500'>
                         Bead
                       </mark>
                       Co.

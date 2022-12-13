@@ -38,7 +38,7 @@ export default function Home({ products }) {
       <SecondaryHero />
       <Hero />
       <Incentives />
-      {/* <ProductList products={products} /> */}
+      <ProductList products={products} />
       <CallToAction />
     </div>
   );
