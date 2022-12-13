@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import Head from 'next/head';
 import CallToAction from '../components/CallToAction';
 import SecondaryHero from '../components/SecondaryHero';
+import Incentives from '../components/Incentives';
 
 export default function Home({ products }) {
   console.log(products);
@@ -36,7 +37,8 @@ export default function Home({ products }) {
       </Head>
       <SecondaryHero />
       <Hero />
-      <ProductList products={products} />
+      <Incentives />
+      {/* <ProductList products={products} /> */}
       <CallToAction />
     </div>
   );

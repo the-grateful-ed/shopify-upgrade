@@ -1,230 +1,52 @@
-import { Fragment, useContext, useRef } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import { XIcon } from '@heroicons/react/outline';
-import Image from 'next/image';
-import Link from 'next/link';
-import { CartContext } from '../context/shopContext';
-import { formatter } from '../utils/helpers';
+/* This example requires Tailwind CSS v2.0+ */
+const incentives = [
+  {
+    name: 'Free shipping',
+    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-shipping-simple.svg',
+    description: "It's not actually free we just price it into the products. Someone's paying for it, and it's not us.",
+  },
+  {
+    name: '10-year warranty',
+    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-warranty-simple.svg',
+    description: "If it breaks in the first 10 years we'll replace it. After that you're on your own though.",
+  },
+  {
+    name: 'Exchanges',
+    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-exchange-simple.svg',
+    description:
+      "If you don't like it, trade it to one of your friends for something of theirs. Don't send it here though.",
+  },
+]
 
-export default function MiniCart({ cart }) {
-  const cancelButtonRef = useRef();
-
-  const {
-    cartOpen,
-    setCartOpen,
-    checkoutUrl,
-    removeCartItem,
-    clearCart,
-    cartLoading,
-    incrementCartItem,
-    decrementCartItem,
-  } = useContext(CartContext);
-
-  let cartTotal = 0;
-  cart.map((item) => {
-    cartTotal += item?.variantPrice * item?.variantQuantity;
-  });
-
+export default function Example() {
   return (
-    <Transition.Root show={cartOpen} as={Fragment}>
-      <Dialog
-        initialFocus={cancelButtonRef}
-        as='div'
-        className='overflow-hidden fixed inset-0 z-50'
-        onClose={() => {
-          setCartOpen(!cartOpen);
-        }}
-      >
-        <div className='overflow-hidden absolute inset-0'>
-          <Transition.Child
-            as={Fragment}
-            enter='ease-in-out duration-500'
-            enterFrom='opacity-0'
-            enterTo='opacity-100'
-            leave='ease-in-out duration-500'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'
-          >
-            <Dialog.Overlay className='absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity' />
-          </Transition.Child>
-
-          <div className='flex fixed inset-y-0 right-0 pl-10 max-w-full'>
-            <Transition.Child
-              as={Fragment}
-              enter='transform transition ease-in-out duration-500 sm:duration-700'
-              enterFrom='translate-x-full'
-              enterTo='translate-x-0'
-              leave='transform transition ease-in-out duration-500 sm:duration-700'
-              leaveFrom='translate-x-0'
-              leaveTo='translate-x-full'
-            >
-              <div className='w-screen max-w-md'>
-                <div className='flex overflow-y-scroll flex-col h-full bg-white shadow-xl'>
-                  <div className='overflow-y-auto flex-1 px-4 py-6 sm:px-6'>
-                    <div className='flex justify-between items-start'>
-                      <Dialog.Title className='text-lg font-medium text-gray-900'>
-                        Shopping cart
-                      </Dialog.Title>
-                      <div className='flex items-center ml-3 h-7'>
-                        <button
-                          ref={cancelButtonRef}
-                          type='button'
-                          className='p-2 -m-2 text-gray-400 hover:text-gray-500'
-                          onClick={() => setCartOpen(false)}
-                        >
-                          <span className='sr-only'>Close panel</span>
-                          <XIcon className='w-6 h-6' aria-hidden='true' />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className='mt-8'>
-                      <div className='flow-root'>
-                        {cart.length > 0 ? (
-                          <ul
-                            role='list'
-                            className='-my-6 divide-y divide-gray-200'
-                          >
-                            {cart.map((product) => (
-                              <li
-                                key={product.id + Math.random()}
-                                className='flex relative py-6'
-                              >
-                                <div
-                                  className={`top-0 left-0 right-0 z-50 w-full h-full absolute ${
-                                    cartLoading
-                                      ? 'bg-white opacity-60'
-                                      : 'hidden'
-                                  }`}
-                                ></div>
-                                <div className='overflow-hidden relative flex-shrink-0 w-24 h-24 rounded-md border border-gray-200'>
-                                  <Image
-                                    src={product.image}
-                                    alt={product.title}
-                                    layout='fill'
-                                    objectFit='cover'
-                                  />
-                                </div>
-
-                                <div className='flex flex-col flex-1 ml-4'>
-                                  <div>
-                                    <div className='flex justify-between text-base font-medium text-gray-900'>
-                                      <h3>
-                                        <Link
-                                          href={`/products/${product.handle}`}
-                                          passHref
-                                        >
-                                          <a onClick={() => setCartOpen(false)}>
-                                            {product.title}
-                                          </a>
-                                        </Link>
-                                      </h3>
-                                      <p className='ml-4'>
-                                        {formatter.format(product.variantPrice)}
-                                      </p>
-                                    </div>
-                                    <p className='mt-1 text-sm text-gray-500'>
-                                      {product.variantTitle}
-                                    </p>
-                                  </div>
-                                  <div className='flex flex-1 justify-between items-end text-sm'>
-                                    {/* <p className="text-gray-500">Qty {product.variantQuantity}</p> */}
-                                    <div className={`border`}>
-                                      <button
-                                        className='px-2'
-                                        onClick={() =>
-                                          decrementCartItem(product)
-                                        }
-                                        disabled={cartLoading}
-                                      >
-                                        -
-                                      </button>
-                                      <span className='px-2 border-r border-l'>
-                                        {product.variantQuantity}
-                                      </span>
-                                      <button
-                                        className='px-2'
-                                        onClick={() =>
-                                          incrementCartItem(product)
-                                        }
-                                        disabled={cartLoading}
-                                      >
-                                        +
-                                      </button>
-                                    </div>
-                                    <div className='flex'>
-                                      <button
-                                        onClick={() =>
-                                          removeCartItem(product.id)
-                                        }
-                                        type='button'
-                                        className='font-medium text-gray-500 hover:text-gray-800'
-                                        disabled={cartLoading}
-                                      >
-                                        Remove
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <div>
-                            <p>Nothing in your cart!</p>
-                          </div>
-                        )}
-                      </div>
+    <div className="bg-white">
+      <div className="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8">
+        <div className="bg-gray-50 rounded-2xl px-6 py-16 sm:p-16">
+          <div className="max-w-xl mx-auto lg:max-w-none">
+            <div className="text-center">
+              <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">
+                We built our business on customer service
+              </h2>
+            </div>
+            <div className="mt-12 max-w-sm mx-auto grid grid-cols-1 gap-y-10 gap-x-8 sm:max-w-none lg:grid-cols-3">
+              {incentives.map((incentive) => (
+                <div key={incentive.name} className="text-center sm:flex sm:text-left lg:block lg:text-center">
+                  <div className="sm:flex-shrink-0">
+                    <div className="flow-root">
+                      <img className="w-16 h-16 mx-auto" src={incentive.imageSrc} alt="" />
                     </div>
                   </div>
-                  {cart.length > 0 ? (
-                    <div className='px-4 py-6 border-t border-gray-200 sm:px-6'>
-                      <div className='flex justify-between text-base font-medium text-gray-900'>
-                        <p>Subtotal</p>
-                        <p>{formatter.format(cartTotal)}</p>
-                      </div>
-                      <p className='mt-0.5 text-sm text-gray-500'>
-                        Shipping and taxes calculated at checkout.
-                      </p>
-                      <div className='mt-6'>
-                        <a
-                          href={checkoutUrl}
-                          className={`flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-black border border-transparent rounded-md shadow-sm hover:bg-gray-800 ${
-                            cartLoading
-                              ? 'cursor-not-allowed'
-                              : 'cursor-pointer'
-                          }`}
-                        >
-                          Checkout
-                        </a>
-                      </div>
-                      <div className='flex justify-center mt-6 text-sm text-center text-gray-500'>
-                        <p>
-                          <button
-                            onClick={() => clearCart()}
-                            className='font-medium hover:text-gray-800'
-                          >
-                            Clear Cart
-                          </button>{' '}
-                          or{' '}
-                          <button
-                            type='button'
-                            className='font-medium hover:text-gray-800'
-                            onClick={() => setCartOpen(false)}
-                          >
-                            Continue Shopping
-                            <span aria-hidden='true'> &rarr;</span>
-                          </button>
-                        </p>
-                      </div>
-                    </div>
-                  ) : null}
+                  <div className="mt-3 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0">
+                    <h3 className="text-sm font-medium text-gray-900">{incentive.name}</h3>
+                    <p className="mt-2 text-sm text-gray-500">{incentive.description}</p>
+                  </div>
                 </div>
-              </div>
-            </Transition.Child>
+              ))}
+            </div>
           </div>
         </div>
-      </Dialog>
-    </Transition.Root>
-  );
+      </div>
+    </div>
+  )
 }

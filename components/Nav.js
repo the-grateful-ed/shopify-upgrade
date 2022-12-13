@@ -1,5 +1,6 @@
 import { useContext, useState, Fragment } from 'react';
 import { CartContext } from '../context/shopContext';
+import Image from 'next/image';
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react';
 import {
   MenuIcon,
@@ -220,7 +221,7 @@ export default function Nav() {
               <Tab.Group as='div' className='mt-2'>
                 <div className='border-b border-gray-200'>
                   <Tab.List className='flex px-4 -mb-px space-x-8'>
-                    {navigation.categories.map((category) => (
+                    {/* {navigation.categories.map((category) => (
                       <Tab
                         key={category.name}
                         className={({ selected }) =>
@@ -234,11 +235,11 @@ export default function Nav() {
                       >
                         {category.name}
                       </Tab>
-                    ))}
+                    ))} */}
                   </Tab.List>
                 </div>
                 <Tab.Panels as={Fragment}>
-                  {navigation.categories.map((category) => (
+                  {/* {navigation.categories.map((category) => (
                     <Tab.Panel
                       key={category.name}
                       className='px-4 py-6 space-y-12'
@@ -273,12 +274,12 @@ export default function Nav() {
                         ))}
                       </div>
                     </Tab.Panel>
-                  ))}
+                  ))} */}
                 </Tab.Panels>
               </Tab.Group>
 
               <div className='px-4 py-6 space-y-6 border-t border-gray-200'>
-                {navigation.pages.map((page) => (
+                {/* {navigation.pages.map((page) => (
                   <div key={page.name} className='flow-root'>
                     <a
                       href={page.href}
@@ -287,7 +288,7 @@ export default function Nav() {
                       {page.name}
                     </a>
                   </div>
-                ))}
+                ))} */}
               </div>
 
               <div className='px-4 py-6 space-y-6 border-t border-gray-200'>
@@ -363,134 +364,23 @@ export default function Nav() {
           {/* Secondary navigation */}
           <div className='bg-[#dd7dff]'>
             <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
-              <div className='flex justify-between items-center h-16'>
+              <div className='flex justify-between items-center h-20'>
                 {/* Logo (lg+) */}
                 <div className='hidden lg:flex-1 lg:flex lg:items-center'>
-                  <a href='#'>
-                    <span className='sr-only'>Workflow</span>
-                    <img
-                      className='w-auto h-8'
-                      src='https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600'
-                      alt=''
-                    />
+                  <a href='./'>
+                    <span className='sr-only'>Pinky's Bead Company</span>
+                    <h1 class='block mb-1 text-2xl font-extrabold tracking-tight leading-none text-white md:text-3xl lg:text-4xl'>
+                      Pinky's
+                      <mark class='px-2 text-white bg-blue-600 rounded dark:bg-blue-500'>
+                        Bead
+                      </mark>
+                      Co.
+                    </h1>
                   </a>
                 </div>
 
                 <div className='hidden h-full lg:flex'>
                   {/* Flyout menus */}
-                  <Popover.Group className='inset-x-0 bottom-0 px-4'>
-                    <div className='flex justify-center space-x-8 h-full'>
-                      {navigation.categories.map((category) => (
-                        <Popover key={category.name} className='flex'>
-                          {({ open }) => (
-                            <>
-                              <div className='flex relative'>
-                                <Popover.Button
-                                  className={classNames(
-                                    open
-                                      ? 'text-indigo-600'
-                                      : 'text-black link link-underline link-underline-black',
-                                    'flex relative justify-center items-center text-sm font-medium transition-colors duration-200 ease-out'
-                                  )}
-                                >
-                                  {category.name}
-                                  <span
-                                    className={classNames(
-                                      open ? 'bg-indigo-600' : '',
-                                      'absolute z-20 -bottom-px inset-x-0 h-0.5 transition ease-out duration-200'
-                                    )}
-                                    aria-hidden='true'
-                                  />
-                                </Popover.Button>
-                              </div>
-
-                              <Transition
-                                as={Fragment}
-                                enter='transition ease-out duration-200'
-                                enterFrom='opacity-0'
-                                enterTo='opacity-100'
-                                leave='transition ease-in duration-150'
-                                leaveFrom='opacity-100'
-                                leaveTo='opacity-0'
-                              >
-                                <Popover.Panel className='absolute inset-x-0 top-full z-10 text-sm text-gray-500 bg-white'>
-                                  {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                                  <div
-                                    className='absolute inset-0 top-1/2 bg-white shadow'
-                                    aria-hidden='true'
-                                  />
-                                  {/* Fake border when menu is open */}
-                                  <div
-                                    className='absolute inset-0 top-0 px-8 mx-auto max-w-7xl h-px'
-                                    aria-hidden='true'
-                                  >
-                                    <div
-                                      className={classNames(
-                                        open ? 'bg-gray-200' : 'bg-transparent',
-                                        'w-full h-px transition-colors duration-200 ease-out'
-                                      )}
-                                    />
-                                  </div>
-
-                                  <div className='relative'>
-                                    <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
-                                      <div className='grid grid-cols-4 gap-x-8 gap-y-10 py-16'>
-                                        {category.featured.map((item) => (
-                                          <div
-                                            key={item.name}
-                                            className='relative group'
-                                          >
-                                            <div className='overflow-hidden bg-gray-100 rounded-md aspect-w-1 aspect-h-1 group-hover:opacity-75'>
-                                              <img
-                                                src={item.imageSrc}
-                                                alt={item.imageAlt}
-                                                className='object-cover object-center'
-                                              />
-                                            </div>
-                                            <a
-                                              href={item.href}
-                                              className='block mt-4 font-medium text-gray-900'
-                                            >
-                                              <span
-                                                className='absolute inset-0 z-10'
-                                                aria-hidden='true'
-                                              />
-                                              {item.name}
-                                            </a>
-                                            <p
-                                              aria-hidden='true'
-                                              className='mt-1'
-                                            >
-                                              Shop now
-                                            </p>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  </div>
-                                </Popover.Panel>
-                              </Transition>
-                            </>
-                          )}
-                        </Popover>
-                      ))}
-
-                      {navigation.pages.map((page) => (
-                        <div key={page.name} className='pt-2'>
-                          <a
-                            href={page.href}
-                            className='inline-block relative text-sm font-medium text-indigo-600 group focus:outline-none focus:ring active:text-indigo-500'
-                          >
-                            <span className='absolute inset-0 bg-indigo-600 transition-transform translate-x-0 translate-y-0 group-hover:translate-y-0.5 group-hover:translate-x-0.5'></span>
-
-                            <span className='block relative px-8 py-3 bg-white border border-current'>
-                              {page.name}{' '}
-                            </span>
-                          </a>
-                        </div>
-                      ))}
-                    </div>
-                  </Popover.Group>
                 </div>
 
                 {/* Mobile menu and search (lg-) */}
