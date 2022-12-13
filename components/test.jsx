@@ -165,29 +165,37 @@ export default function MiniCart({ cart }) {
               </div>
             )}
           </div>
-
-          <div className='space-y-4 text-center'>
-            <a
-              href='#'
-              className='block px-5 py-3 font-mono text-sm uppercase border-2 border-black hover:ring-1 hover:ring-black'
-            >
-              View my cart (2)
-            </a>
-
-            <a
-              href='#'
-              className='block px-5 py-3 font-mono text-sm text-white uppercase bg-teal-500 border-black hover:bg-teal-600'
-            >
-              Checkout
-            </a>
-
-            <a
-              href='#'
-              className='inline-block font-mono text-sm underline uppercase underline-offset-4 hover:opacity-75'
-            >
-              Continue shopping
-            </a>
-          </div>
+          {cart.length > 0 ? (
+            <div className='space-y-4 text-center'>
+              <a
+                href='#'
+                className='block px-5 py-3 font-mono text-sm uppercase border-2 border-black hover:ring-1 hover:ring-black'
+              >
+                View my cart (2)
+              </a>
+              <a
+                href={checkoutUrl}
+                className={`block px-5 py-3 font-mono text-sm text-white uppercase bg-teal-500 border-black hover:bg-teal-600 ${
+                  cartLoading ? 'cursor-not-allowed' : 'cursor-pointer'
+                }`}
+              >
+                Checkout
+              </a>
+              <a
+                href='#'
+                className='block px-5 py-3 font-mono text-sm text-white uppercase bg-teal-500 border-black hover:bg-teal-600'
+              >
+                {formatter.format(cartTotal)}
+              </a>
+              <button
+                type='button'
+                className='font-medium hover:text-gray-800'
+                onClick={() => setCartOpen(false)}
+              >
+                Continue shopping
+              </button>
+            </div>
+          ) : null}
         </div>
       </Dialog>
     </Transition.Root>
