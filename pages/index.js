@@ -3,6 +3,7 @@ import ProductList from '../components/ProductList';
 import Hero from '../components/Hero';
 import Head from 'next/head';
 import CallToAction from '../components/CallToAction';
+import SecondaryHero from '../components/SecondaryHero';
 
 export default function Home({ products }) {
   return (
@@ -32,6 +33,7 @@ export default function Home({ products }) {
         <meta property='og:locale' content='en_US' />
         <meta property='og:site_name' content='Modern eCommerce Course' />
       </Head>
+      <SecondaryHero />
       <Hero />
       <ProductList products={products} />
       <CallToAction />

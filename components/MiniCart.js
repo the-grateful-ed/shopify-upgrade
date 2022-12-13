@@ -113,9 +113,10 @@ export default function MiniCart({ cart }) {
                                         <Link
                                           href={`/products/${product.handle}`}
                                           passHref
-                                          onClick={() => setCartOpen(false)}
                                         >
-                                          {product.title}
+                                          <a onClick={() => setCartOpen(false)}>
+                                            {product.title}
+                                          </a>
                                         </Link>
                                       </h3>
                                       <p className='ml-4'>
